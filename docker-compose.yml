@@ -1,0 +1,19 @@
+version: '2.4'
+
+services:
+  frontend:
+    image: node:18.16-bullseye-slim
+    ports:
+      - "${FRONTEND_PORT}:3000"
+    environment:
+      SHELL: /bin/bash
+      NODE_ENV: development
+      NODE_OPTIONS: --max-old-space-size=8192
+    volumes:
+      - "${FRONTEND_PATH_PROJECT}:/usr/src/app"
+    working_dir: /usr/src/app
+    command: bash -c "yarn install && yarn start --host 0.0.0.0"
+
+volumes:
+  db_react_symfony_mysql:
+  db_angular_symfony_mysql:
